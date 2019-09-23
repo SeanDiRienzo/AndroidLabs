@@ -2,5 +2,10 @@
     <string name="app_name">Android Labs</string>
     <string name="hello_message">Hello World eh</string>
     <string name="ButtonText">I\'m a Button eh</string>
+    <string name="GUI_Message">Look at my GUI eh</string>
+    <string name="checkbox_message">Check this out! eh</string>
+    <string name="clickhere_button">ClICK HERE eh</string>
+    <string name="switch_message">Switch on / off eh</string>
+    <string name="edittext_message">Type Here eh</string>
 
 </resources>
