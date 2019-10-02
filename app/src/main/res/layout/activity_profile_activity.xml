@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profileTextView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nameTextView" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/nameHint"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/emailTextView" />
+
+    <EditText
+        android:id="@+id/profile_EmailField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/emailHInt"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/profile_yourPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/pictureTextView" />
+
+    <ImageButton
+        android:id="@+id/profile_imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/picture_frame" />
+
+    <TextView
+        android:id="@+id/profile_ClickInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/clickButtonTextView" />
+</LinearLayout>

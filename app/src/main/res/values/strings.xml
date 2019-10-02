@@ -7,5 +7,17 @@
     <string name="clickhere_button">ClICK HERE</string>
     <string name="switch_message">Switch on / off</string>
     <string name="edittext_message">Type Here</string>
+    <string name="lab3_EditText1">Type email here</string>
+    <string name="lab3_EditText2"> </string>
+    <string name="lab3_TextView1">Enter your email address:</string>
+    <string name="lab3_TextView2">Type your password:</string>
+    <string name="lab3_Button1">LOGIN</string>
+    <string name="profileTextView">Your Profile</string>
+    <string name="nameTextView">Your Name:</string>
+    <string name="nameHint">Enter your name</string>
+    <string name="emailHInt">Enter your email</string>
+    <string name="pictureTextView">Your Picture:</string>
+    <string name="clickButtonTextView">Click the button above to take a picture</string>
+    <string name="emailTextView">Your email::</string>
 
 </resources>
