@@ -19,5 +19,8 @@
     <string name="pictureTextView">Your Picture:</string>
     <string name="clickButtonTextView">Click the button above to take a picture</string>
     <string name="emailTextView">Your email::</string>
+    <string name="goToChatButtonText">Go to chat</string>
+    <string name="sendButton">Send</string>
+    <string name="receiveButton">Receive</string>
 
 </resources>

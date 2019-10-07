@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Button;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class ProfileActivity extends AppCompatActivity {
     CharSequence email;
     EditText emailField;
     ImageButton mImageButton;
+    Button goToChatButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,22 @@ public class ProfileActivity extends AppCompatActivity {
         emailField = findViewById(R.id.profile_EmailField);
         emailField.setText(email);
         mImageButton = findViewById(R.id.profile_imageButton);
+        goToChatButton = findViewById(R.id.profile_goToChatButton);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
             }
         });
+        goToChatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startChatRoomActivity();
+
+
+            }
+        });
+
     }
 
     @Override
@@ -85,6 +97,11 @@ public class ProfileActivity extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
+    }
+
+    public void startChatRoomActivity() {
+        Intent chatRoomActivity = new Intent(this, ChatRoomActivity.class);
+        startActivity(chatRoomActivity);
     }
 
 }

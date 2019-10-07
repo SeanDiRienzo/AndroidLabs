@@ -58,4 +58,11 @@
         android:layout_height="wrap_content"
 
         android:text="@string/clickButtonTextView" />
+
+    <Button
+        android:id="@+id/profile_goToChatButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goToChatButtonText"
+/>
 </LinearLayout>
