@@ -43,7 +43,7 @@ public class ChatAdapter extends BaseAdapter {
         ViewHolder holder;
         holder = new ViewHolder();
 
-        if (message.isMine) {
+        if (message.isSent) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.message_sent, parent, false);
             holder.message = convertView.findViewById(R.id.sendMessageText);
         } else {

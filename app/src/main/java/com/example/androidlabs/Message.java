@@ -10,16 +10,18 @@ public class Message {
     /**
      * boolean to determine, who is sender of this message
      */
-    boolean isMine;
+    boolean isSent;
+    long id;
 
 
     /**
      * Constructor to make a Message object
      */
-    public Message(String message, boolean isMine) {
+    public Message(String message, boolean isMine, long id) {
         super();
         this.message = message;
-        this.isMine = isMine;
+        this.isSent = isMine;
+        this.id = id;
 
     }
 
@@ -34,11 +36,11 @@ public class Message {
     }
 
     public boolean isMine() {
-        return isMine;
+        return isSent   ;
     }
 
     public void setMine(boolean isMine) {
-        this.isMine = isMine;
+        this.isSent = isMine;
     }
 
 
