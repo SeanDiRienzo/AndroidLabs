@@ -22,5 +22,6 @@
     <string name="goToChatButtonText">Go to chat</string>
     <string name="sendButton">Send</string>
     <string name="receiveButton">Receive</string>
+    <string name="goToWeatherButtonText">Go to Weather Forecast</string>
 
 </resources>

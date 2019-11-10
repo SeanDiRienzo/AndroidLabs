@@ -21,6 +21,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText emailField;
     ImageButton mImageButton;
     Button goToChatButton;
+    Button goToWeatherActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
         emailField = findViewById(R.id.profile_EmailField);
         emailField.setText(email);
         mImageButton = findViewById(R.id.profile_imageButton);
+        goToWeatherActivityButton = findViewById(R.id.profile_goToWeatherButton);
         goToChatButton = findViewById(R.id.profile_goToChatButton);
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +47,13 @@ public class ProfileActivity extends AppCompatActivity {
                 startChatRoomActivity();
 
 
+            }
+        });
+
+        goToWeatherActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startWeatherForecastActivity();
             }
         });
 
@@ -102,6 +111,11 @@ public class ProfileActivity extends AppCompatActivity {
     public void startChatRoomActivity() {
         Intent chatRoomActivity = new Intent(this, ChatRoomActivity.class);
         startActivity(chatRoomActivity);
+    }
+
+    public void startWeatherForecastActivity() {
+        Intent weatherActivity = new Intent(this, WeatherForecast.class);
+        startActivity(weatherActivity);
     }
 
 }
