@@ -27,4 +27,7 @@
     <string name="dogActionTitle">Dog Action</string>
     <string name="sheepActionTitle">Sheep Action</string>
     <string name="duckActionTitle">Duck Action</string>
+    <string name="overflowChoice">Overflow</string>
+    <string name="alert_textview">What is your message?</string>
+    <string name="alert_hint">Type here</string>
 </resources>
