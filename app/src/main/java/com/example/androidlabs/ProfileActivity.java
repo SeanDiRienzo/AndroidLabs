@@ -22,6 +22,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageButton mImageButton;
     Button goToChatButton;
     Button goToWeatherActivityButton;
+    Button goToToolbarActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,13 @@ public class ProfileActivity extends AppCompatActivity {
         mImageButton = findViewById(R.id.profile_imageButton);
         goToWeatherActivityButton = findViewById(R.id.profile_goToWeatherButton);
         goToChatButton = findViewById(R.id.profile_goToChatButton);
+        goToToolbarActivityButton = findViewById(R.id.profile_goToToolbarActivity);
+        goToToolbarActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTestToolbarActivity();
+            }
+        });
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,5 +126,9 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(weatherActivity);
     }
 
+    public void startTestToolbarActivity() {
+        Intent toolbarActivity = new Intent(this, TestToolbar.class);
+        startActivity(toolbarActivity);
+    }
 }
 

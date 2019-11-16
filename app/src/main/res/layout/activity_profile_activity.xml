@@ -71,4 +71,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/goToWeatherButtonText" />
+
+    <Button
+        android:id="@+id/profile_goToToolbarActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goToToolbarButtonText" />
 </LinearLayout>

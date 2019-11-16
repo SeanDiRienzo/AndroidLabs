@@ -23,4 +23,8 @@
     <string name="sendButton">Send</string>
     <string name="receiveButton">Receive</string>
     <string name="goToWeatherButtonText">Go to Weather Forecast</string>
+    <string name="goToToolbarButtonText">Go to Toolbar Activity</string>
+    <string name="dogActionTitle">Dog Action</string>
+    <string name="sheepActionTitle">Sheep Action</string>
+    <string name="duckActionTitle">Duck Action</string>
 </resources>
