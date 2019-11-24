@@ -124,7 +124,7 @@ public class ChatRoomActivity extends AppCompatActivity {
             Bundle dataToPass = new Bundle();
             dataToPass.putString("message", messages.get(position).message);
             dataToPass.putInt("position", position);
-            dataToPass.putLong("id", id);
+            dataToPass.putLong("id", messages.get(position).id);
 
             if (isTablet) {
                 MessageFragment dFragment = new MessageFragment(); //add a DetailFragment
@@ -152,16 +152,17 @@ public class ChatRoomActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) //if you hit the delete button instead of back button
             {
                 long id = data.getLongExtra("id", 0);
-                deleteMessageId((int) id);
+                int position = data.getIntExtra("position", 0);
+                deleteMessageId((int) id, position);
             }
         }
     }
 
-    public void deleteMessageId(long id) {
-        Log.i("Delete this message:", " id=" + id);
-        messages.remove((int) id);
+    public void deleteMessageId(long id, int position) {
+        Log.i("Delete this message:", " id=" + id + "pos=" + position);
+        messages.remove(position);
         adapter.notifyDataSetChanged();
-        db.delete(MyDatabaseOpenHelper.TABLE_NAME, "_id =?", new String[]{Long.toString(id )});
+        db.delete(MyDatabaseOpenHelper.TABLE_NAME, "_id =?", new String[]{String.valueOf(id)});
     }
 
     @Override

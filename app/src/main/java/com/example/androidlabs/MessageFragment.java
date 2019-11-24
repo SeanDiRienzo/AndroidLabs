@@ -55,7 +55,7 @@ public class MessageFragment extends Fragment {
 
             if (isTablet) { //both the list and details are on the screen:
                 ChatRoomActivity parent = (ChatRoomActivity) getActivity();
-                parent.deleteMessageId(id); //this deletes the item and updates the list
+                parent.deleteMessageId(id, position); //this deletes the item and updates the list
 
 
                 //now remove the fragment since you deleted it from the database:
