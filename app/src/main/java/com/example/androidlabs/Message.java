@@ -1,6 +1,8 @@
 package com.example.androidlabs;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     /**
      * The content of the message
      */
@@ -26,9 +28,12 @@ public class Message {
     }
 
 
-
     public String getMessage() {
-        return message;
+        return this.message;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public void setMessage(String message) {
@@ -36,7 +41,7 @@ public class Message {
     }
 
     public boolean isMine() {
-        return isSent   ;
+        return isSent;
     }
 
     public void setMine(boolean isMine) {

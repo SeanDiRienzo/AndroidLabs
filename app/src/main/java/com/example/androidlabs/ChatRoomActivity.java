@@ -1,21 +1,23 @@
 package com.example.androidlabs;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.database.DatabaseUtils;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.example.androidlabs.MyDatabaseOpenHelper.TABLE_NAME;
 
 public class ChatRoomActivity extends AppCompatActivity {
     ArrayList<Message> messages;
@@ -25,26 +27,34 @@ public class ChatRoomActivity extends AppCompatActivity {
     Button receiveButton;
     EditText chatText;
     public static final String ACTIVITY_NAME = "CHATROOM_ACTIVITY";
+    SQLiteDatabase db;
+    public static final String ITEM_SELECTED = "ITEM";
+    public static final String ITEM_POSITION = "POSITION";
+    public static final String ITEM_ID = "ID";
+    public static final int EMPTY_ACTIVITY = 345;
+    MyDatabaseOpenHelper dbOpener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_chat_room);
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
         sendButton = findViewById(R.id.sendButton);
         receiveButton = findViewById(R.id.receiveButton);
         chatText = findViewById(R.id.chatText);
         list = findViewById(R.id.messageView);
         messages = new ArrayList<Message>();
-        final SQLiteDatabase db;
+
 
         //get a database:
-        MyDatabaseOpenHelper dbOpener = new MyDatabaseOpenHelper(this);
+        dbOpener = new MyDatabaseOpenHelper(this);
         db = dbOpener.getWritableDatabase();
 
 
         //query all the results from the database:
         String[] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGETEXT, MyDatabaseOpenHelper.COL_ISSENT};
-        Cursor results = db.query(false, MyDatabaseOpenHelper.TABLE_NAME, columns, null, null, null, null, null, null);
+        Cursor results = db.query(false, TABLE_NAME, columns, null, null, null, null, null, null);
 
         //find the column indices:
         int messageColumnIndex = results.getColumnIndex(MyDatabaseOpenHelper.COL_MESSAGETEXT);
@@ -83,7 +93,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //put string email in the EMAIL column:
                 newRowValues.put(MyDatabaseOpenHelper.COL_ISSENT, true);
                 //insert in the database:
-                long newId = db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
+                long newId = db.insert(TABLE_NAME, null, newRowValues);
                 Message tempMessage = new Message(getChatText(), true, newId);
                 addNewMessage(tempMessage);
                 clearChatText();
@@ -102,7 +112,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                 //put string email in the EMAIL column:
                 newRowValues.put(MyDatabaseOpenHelper.COL_ISSENT, false);
                 //insert in the database:
-                long newId = db.insert(MyDatabaseOpenHelper.TABLE_NAME, null, newRowValues);
+                long newId = db.insert(TABLE_NAME, null, newRowValues);
                 Message tempMessage = new Message(getChatText(), false, newId);
                 addNewMessage(tempMessage);
                 clearChatText();
@@ -110,7 +120,48 @@ public class ChatRoomActivity extends AppCompatActivity {
             }
         });
 
+        list.setOnItemClickListener((list, item, position, id) -> {
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString("message", messages.get(position).message);
+            dataToPass.putInt("position", position);
+            dataToPass.putLong("id", id);
 
+            if (isTablet) {
+                MessageFragment dFragment = new MessageFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                dFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+
+                        .commit(); //actually load the fragment.
+            } else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity.this, MessageContainer.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivityForResult(nextActivity, EMPTY_ACTIVITY); //make the transition
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == EMPTY_ACTIVITY) {
+            if (resultCode == RESULT_OK) //if you hit the delete button instead of back button
+            {
+                long id = data.getLongExtra("id", 0);
+                deleteMessageId((int) id);
+            }
+        }
+    }
+
+    public void deleteMessageId(long id) {
+        Log.i("Delete this message:", " id=" + id);
+        messages.remove((int) id);
+        adapter.notifyDataSetChanged();
+        db.delete(MyDatabaseOpenHelper.TABLE_NAME, "_id =?", new String[]{Long.toString(id )});
     }
 
     @Override
@@ -159,7 +210,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
     public void printCursor(Cursor c, int version) {
 
-        Log.i("Cursor Object", "Version : " + version + " Columns: " + c.getColumnCount() + ", Names : " + Arrays.toString(c.getColumnNames()) + ", Results " + c.getCount() + DatabaseUtils.dumpCursorToString(c) );
+        Log.i("Cursor Object", "Version : " + version + " Columns: " + c.getColumnCount() + ", Names : " + Arrays.toString(c.getColumnNames()) + ", Results " + c.getCount() + DatabaseUtils.dumpCursorToString(c));
     }
 
 
